@@ -1,0 +1,10 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+   style="@style/main_style"
+    tools:context=".MovieFragment">
+
+    <GridView
+        android:id="@+id/gridview_movies"
+       style="@style/gridView_style"/>
+
+</FrameLayout>

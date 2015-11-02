@@ -1,0 +1,11 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_standard_style"
+    tools:context="com.example.android.popularmovies.MainActivity.MovieFragment">
+
+    <ImageView
+        android:id="@+id/movie_content_imageview"
+        style="@style/grid_imageView_style"
+    />
+
+</FrameLayout>

@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="action_settings">Sort</string>
+
+    <!--json url parameters-->
+    <string name="result_arr">results</string>
+    <string name="poster_path">poster_path</string>
+    <string name="title">original_title</string>
+    <string name="background_path">backdrop_path</string>
+    <string name="overview">overview</string>
+    <string name="votes">vote_average</string>
+    <string name="release_date">release_date</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="rating">Rating : </string>
+    <string name="release">Release Date : </string>
+
+
+    <!--poster sizes-->
+    <string name="w92_size">w92</string>
+    <string name="w154_size">w154</string>
+    <string name="w185_size">w185</string>
+    <string name="w342_size">w342</string>
+    <string name="w500_size">w500</string>
+    <string name="w780_size">w780</string>
+    <string name="original_size">original</string>
+
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <string name="pref_sorting">Sort</string>
+    <string name="sorting_order">sort_order</string>
+    <string-array name="pref_sorting_labels">
+        <item>Most Popular</item>
+        <item>Highest Rated</item>
+        <!--item>Default</item-->
+    </string-array>
+
+    <string-array name="pref_sorting_values">
+        <item>0</item>
+        <item>1</item>
+        <!--item>-1</item-->
+    </string-array>
+
+    <string name="pref_defaultValue">-1</string>
+    <string name="highest_rated">vote_average.desc</string>
+    <string name="most_popular">popularity.desc</string>
+    <string name="default_value">Default</string>
+
+    <string name="intent_movie_details">movie_details</string>
+</resources>
