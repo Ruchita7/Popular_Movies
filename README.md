@@ -1,4 +1,4 @@
-# Popular_Movies_Stage1
+# Popular_Movies Stage 1
 
 #This is an android app project which allows users to discover the most popular movies playing. 
 #This app presents  the user with a grid arrangement of movie posters upon launch.It allow users to change sort order via a setting.
