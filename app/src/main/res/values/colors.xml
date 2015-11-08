@@ -8,4 +8,16 @@
     <color name="teal">#009688</color>
     <color name="purple">#9575CD</color>
     <color name="green">#7CB342</color>
+    <color name="colorBlackPrimary">#212121</color>
+    <color name="colorBlackPrimaryDark">#000000</color>
+    <color name="indigo">#3F51B5</color>
+    <color name="maroon">#B71C1C</color>
+    <color name="dark_blue">#1A237E</color>
+    <color name="dark_green">#1B5E20</color>
+    <color name="deep_orange">#BF360C</color>
+    <color name="orange">#E65100</color>
+    <color name="brown">#795548</color>
+    <color name="light_green">#4CAF50</color>
+    <color name="deep_orange_primary">#FF5722</color>
+    <color name="orange_primary">#FF9800</color>
 </resources>

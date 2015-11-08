@@ -1,6 +1,7 @@
 package com.example.android.popularmovies;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,14 +16,38 @@ import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.Date;
+import java.util.HashMap;
+
+import butterknife.Bind;
+import butterknife.BindDrawable;
+import butterknife.ButterKnife;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MovieDetailActivityFragment extends Fragment {
 
+    @Bind(R.id.movie_title_textView)
+    TextView movie_title_textView;
+
+    @Bind(R.id.movie_backdrop_imageView)
+    ImageView movie_backdrop_imageView;
+
+    @BindDrawable(R.drawable.resource_notfound)
+    Drawable resource_notfound;
+
+    @Bind(R.id.plot_synopsis_textView)
+    TextView plot_synopsis_textView;
+
+    @Bind(R.id.user_rating_textView)
+    TextView user_rating_textView;
+
+    @Bind(R.id.release_date_textView)
+    TextView release_date_textView;
+
+    @Bind(R.id.movie_poster_imageView)
+    ImageView movie_poster_imageView;
 
     public MovieDetailActivityFragment() {
     }
@@ -46,30 +71,21 @@ public class MovieDetailActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         String date = null;
         View rootView = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        ButterKnife.bind(this, rootView);
         Intent intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra(getString(R.string.intent_movie_details))) {
             HashMap<String, String> movieMap = (HashMap<String, String>) intent.getSerializableExtra("movie_details");
-
-            TextView titleTextView = (TextView) rootView.findViewById(R.id.movie_title_textView);
-            titleTextView.setText(movieMap.get(getString(R.string.title)));
-
-            ImageView backdropImageView = (ImageView) rootView.findViewById(R.id.movie_backdrop_imageView);
+            movie_title_textView.setText(movieMap.get(getString(R.string.title)));
             String path = movieMap.get(getString((R.string.background_path))).replaceAll("/", "");
-
 
             Uri uri = Uri.parse(ConstantUtil.POSTER_URL).buildUpon().
                     appendPath(ConstantUtil.W500_SIZE).
                     appendPath(path).build();
 
-            Picasso.with(getActivity()).load(uri).into(backdropImageView);
+            Picasso.with(getActivity()).load(uri).placeholder(resource_notfound).error(resource_notfound).into(movie_backdrop_imageView);
 
-            TextView synopsisTextView = (TextView) rootView.findViewById(R.id.plot_synopsis_textView);
-            synopsisTextView.setText(movieMap.get(getString(R.string.overview)));
-
-            TextView ratingTextView = (TextView) rootView.findViewById(R.id.user_rating_textView);
-            ratingTextView.setText( movieMap.get(getString(R.string.votes)));
-
-            TextView releaseDateTextView = (TextView) rootView.findViewById(R.id.release_date_textView);
+            plot_synopsis_textView.setText(movieMap.get(getString(R.string.overview)));
+            user_rating_textView.setText(movieMap.get(getString(R.string.votes)));
             SimpleDateFormat format1 = new SimpleDateFormat("yyyy-mm-dd");
 
             String movieReleaseDate = null;
@@ -77,20 +93,18 @@ public class MovieDetailActivityFragment extends Fragment {
                 date = movieMap.get(getString(R.string.release_date));
                 Date parsedDate = format1.parse(date);
                 DateFormat mediumDf = DateFormat.getDateInstance(DateFormat.MEDIUM);
-                movieReleaseDate =  mediumDf.format(parsedDate);
+                movieReleaseDate = mediumDf.format(parsedDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            releaseDateTextView.setText(movieReleaseDate);
-
-            ImageView posterImageView = (ImageView) rootView.findViewById(R.id.movie_poster_imageView);
+            release_date_textView.setText(movieReleaseDate);
             path = movieMap.get(getString(R.string.poster_path)).replaceAll("/", "");
 
             uri = Uri.parse(ConstantUtil.POSTER_URL).buildUpon().
                     appendPath(ConstantUtil.W185_SIZE).
                     appendPath(path).build();
 
-            Picasso.with(getActivity()).load(uri).into(posterImageView);
+            Picasso.with(getActivity()).load(uri).placeholder(resource_notfound).error(resource_notfound).into(movie_poster_imageView);
 
         }
         return rootView;

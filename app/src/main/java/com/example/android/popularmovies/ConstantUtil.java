@@ -26,5 +26,10 @@ public class ConstantUtil {
 
     public static final String GET_REQUEST = "GET";
 
+    public static final int VISIBLE_MOVIES=20;
+
+    public static  final int DEFAULT_VIEW_TYPE = 0;
+
+    public  static  final int IMAGE_VIEW_TYPE = 1;
 
 }

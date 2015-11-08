@@ -3,12 +3,9 @@ package com.example.android.popularmovies;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,18 +15,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,10 +23,13 @@ import java.util.HashMap;
  */
 public class MovieFragment extends Fragment {
 
+
     ImageAdapter mMovieAdapter = null;
     private final String LOG_TAG = MovieFragment.class.getSimpleName();
     private Integer mCurrentPage = 1;
     int mChosenOrder;
+    ArrayList<MovieParcelableObject> mMoviesList;
+
 
     public MovieFragment() {
     }
@@ -56,10 +44,11 @@ public class MovieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mMoviesList = new ArrayList<>();
+        mMovieAdapter = new ImageAdapter(getActivity(), R.layout.content_main, R.id.movie_content_imageview, mMoviesList);
 
-        mMovieAdapter = new ImageAdapter(getActivity(), R.layout.content_main, R.id.movie_content_imageview, new ArrayList<JSONObject>());
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
+        //  ButterKnife.bind(rootView);
         GridView gridView = (GridView) rootView.findViewById(R.id.gridview_movies);
         gridView.setAdapter(mMovieAdapter);
 
@@ -76,23 +65,23 @@ public class MovieFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                try {
-                    JSONObject jsonMovieItem = mMovieAdapter.getItem(position);
-                    ArrayList<String> movieDetailArray = new ArrayList<String>();
-                    HashMap<String, String> movieDetailMap = new HashMap<>();
-                    movieDetailMap.put(getString(R.string.title), jsonMovieItem.getString(getString(R.string.title)));
-                    movieDetailMap.put(getString(R.string.background_path), jsonMovieItem.getString(getString(R.string.background_path)));
-                    movieDetailMap.put(getString(R.string.overview), jsonMovieItem.getString(getString(R.string.overview)));
-                    movieDetailMap.put(getString(R.string.votes), jsonMovieItem.getString(getString(R.string.votes)));
-                    movieDetailMap.put(getString(R.string.release_date), jsonMovieItem.getString(getString(R.string.release_date)));
-                    movieDetailMap.put(getString(R.string.poster_path), jsonMovieItem.getString(getString(R.string.poster_path)));
+                //    try {
+                MovieParcelableObject movieItem = mMovieAdapter.getItem(position);
+                ArrayList<String> movieDetailArray = new ArrayList<String>();
+                HashMap<String, String> movieDetailMap = new HashMap<>();
+                movieDetailMap.put(getString(R.string.title), movieItem.title);
+                movieDetailMap.put(getString(R.string.background_path), movieItem.backgroundUrl);
+                movieDetailMap.put(getString(R.string.overview), movieItem.synopsis);
+                movieDetailMap.put(getString(R.string.votes), movieItem.userRating);
+                movieDetailMap.put(getString(R.string.release_date), movieItem.releaseDate);
+                movieDetailMap.put(getString(R.string.poster_path), movieItem.posterUrl);
 
-                    Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
-                    intent.putExtra(getString(R.string.intent_movie_details), movieDetailMap);
-                    startActivity(intent);
-                } catch (JSONException e) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra(getString(R.string.intent_movie_details), movieDetailMap);
+                startActivity(intent);
+               /* } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
 
             }
         });
@@ -100,7 +89,7 @@ public class MovieFragment extends Fragment {
         //Overriden to populate movie list with more than 20 records
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
-            private int visibleMovies = 20;      //Minimum no of movies to be fetched
+            //   private int visibleMovies = 20;      //Minimum no of movies to be fetched
             private int moviesFetched = 0;      //Count of movies fetched already
             private boolean isLoading = true;
 
@@ -131,8 +120,8 @@ public class MovieFragment extends Fragment {
                         mCurrentPage++;
                     }
                 }
-                if ((mCurrentPage > 1 && mCurrentPage < 5) && ((totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleMovies))) {
-                    new PopularMoviesTask().execute(mCurrentPage++);
+                if ((mCurrentPage > 1 && mCurrentPage < 5) && ((totalItemCount - visibleItemCount) <= (firstVisibleItem + ConstantUtil.VISIBLE_MOVIES))) {
+                    new PopularMoviesTask(getContext(), mMovieAdapter).execute(mCurrentPage++, mChosenOrder);
 
                 }
 
@@ -151,6 +140,7 @@ public class MovieFragment extends Fragment {
     public void onStart() {
         super.onStart();
         populateMovies();
+
     }
 
     /**
@@ -160,6 +150,7 @@ public class MovieFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     /**
@@ -176,7 +167,7 @@ public class MovieFragment extends Fragment {
      */
     private void populateMovies() {
 
-        PopularMoviesTask popularMoviesTask = new PopularMoviesTask();
+        PopularMoviesTask popularMoviesTask = new PopularMoviesTask(getContext(), mMovieAdapter);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (prefs != null) {
             String order = prefs.getString(getString(R.string.sorting_order), getString(R.string.pref_defaultValue));
@@ -190,144 +181,12 @@ public class MovieFragment extends Fragment {
         } else {
             mChosenOrder = Integer.parseInt(getString(R.string.pref_defaultValue));
         }
-        popularMoviesTask.execute(mCurrentPage);
+        popularMoviesTask.execute(mCurrentPage, mChosenOrder);
     }
 
 
-    /**
-     * Class to override AsyncTask for background thread implementation
-     */
-    public class PopularMoviesTask extends AsyncTask<Integer, Void, JSONObject[]> {
-        private final String LOG_TAG = PopularMoviesTask.class.getSimpleName();
-
-        /**
-         * @param params
-         * @return
-         */
-        @Override
-        protected JSONObject[] doInBackground(Integer... params) {
-            HttpURLConnection urlConnection = null;
-            BufferedReader reader = null;
-            String movies[] = null;
-            // Will contain the raw JSON response as a string.
-            String moviesJsonStr = null;
-            Uri buildUri = null;
-
-            try {
-                Resources res = getResources();
-                String[] sortOrder = res.getStringArray(R.array.pref_sorting_values);
-
-
-                if (mChosenOrder == Integer.parseInt(sortOrder[0])) {
-                    buildUri = Uri.parse(ConstantUtil.BASE_URL_FOR_LISTING).buildUpon().
-                            appendQueryParameter(ConstantUtil.SORT_ORDER, getString(R.string.most_popular)).
-                            appendQueryParameter(ConstantUtil.API_KEY_PARAM, BuildConfig.POPULAR_MOVIE_API_KEY).
-                            appendQueryParameter(ConstantUtil.PAGE_NUMBER, mCurrentPage.toString()).build();
-                } else if (mChosenOrder == Integer.parseInt(sortOrder[1])) {
-
-                    buildUri = Uri.parse(ConstantUtil.BASE_URL_FOR_LISTING).buildUpon().
-                            appendQueryParameter(ConstantUtil.SORT_ORDER, getString(R.string.highest_rated)).
-                            appendQueryParameter(ConstantUtil.API_KEY_PARAM, BuildConfig.POPULAR_MOVIE_API_KEY).
-                            appendQueryParameter(ConstantUtil.PAGE_NUMBER, mCurrentPage.toString()).build();
-                } else {
-                    buildUri = Uri.parse(ConstantUtil.BASE_URL_FOR_LISTING).buildUpon().
-                            appendQueryParameter(ConstantUtil.API_KEY_PARAM, BuildConfig.POPULAR_MOVIE_API_KEY).
-                            appendQueryParameter(ConstantUtil.PAGE_NUMBER, mCurrentPage.toString()).build();
-
-                }
-
-                URL url = new URL(buildUri.toString());
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod(ConstantUtil.GET_REQUEST);
-                urlConnection.connect();
-
-                InputStream inputStream = urlConnection.getInputStream();
-                StringBuffer buffer = new StringBuffer();
-                if (inputStream == null) {
-                    // Nothing to do.
-                    return null;
-                }
-
-                reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line + "\n");
-                }
-
-                if (buffer.length() == 0 || buffer == null) {
-                    return null;
-                }
-                moviesJsonStr = buffer.toString();
-
-            } catch (MalformedURLException e) {
-                Log.e(LOG_TAG, "MalformedURLException:", e);
-                return null;
-            } catch (ProtocolException e) {
-                Log.e(LOG_TAG, "ProtocolException:", e);
-                return null;
-            } catch (IOException e) {
-                Log.e(LOG_TAG, "IOException:", e);
-                return null;
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (final IOException e) {
-                        Log.e(LOG_TAG, "Error closing stream:", e);
-                    }
-                }
-                if (moviesJsonStr != null) {
-                    try {
-
-                        return getMovieDataFromJson(moviesJsonStr);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-            return null;
-        }
-
-        /**
-         * Parse JSON String
-         *
-         * @param movieJsonStr
-         * @return
-         * @throws JSONException
-         */
-        private JSONObject[] getMovieDataFromJson(String movieJsonStr) throws JSONException {
-
-            String moviePoster = null;
-            JSONObject movieTempObj = null;
-            String movieImagePath = null;
-
-            JSONObject movieJson = new JSONObject(movieJsonStr);
-            JSONArray movieJsonArray = movieJson.getJSONArray(getString(R.string.result_arr));
-            JSONObject[] moviePosterJSONArr = new JSONObject[movieJsonArray.length()];
-            for (int i = 0; i < movieJsonArray.length(); i++) {
-                moviePosterJSONArr[i] = movieJsonArray.getJSONObject(i);
-            }
-
-            return moviePosterJSONArr;
-        }
-
-
-        /**
-         * @param results
-         */
-        @Override
-        protected void onPostExecute(JSONObject[] results) {
-            if (results != null) {
-                mMovieAdapter.addAll(results);
-            }
-        }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
-
-
 }
