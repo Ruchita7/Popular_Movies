@@ -2,9 +2,11 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!--item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item-->
+        <item name="colorPrimary">@color/colorBlackPrimary</item>
+        <item name="colorPrimaryDark">@color/colorBlackPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -49,69 +51,175 @@
     <style name="imageView_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:scaleType">centerCrop</item>
     </style>
 
-    <style name="grid_imageView_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="grid_imageView_style" parent="imageView_style">
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_margin">@dimen/min_width</item>
     </style>
 
     <!--style for title textview-->
-    <style name="title_textView_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:background">@android:color/holo_blue_light</item>
+    <style name="title_textView_style" parent="imageView_style">
+        <item name="android:paddingBottom">@dimen/title_padding</item>
+        <item name="android:paddingRight">@dimen/textView_standard_padding</item>
+        <item name="android:layout_marginBottom">@dimen/detail_padding</item>
+        <item name="android:background">@color/dark_green</item>
+        <item name="android:paddingTop">@dimen/title_padding</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/text_subheading</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:visibility">invisible</item>
     </style>
 
     <!--style for poster image view-->
     <style name="poster_imageView_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/textView_standard_padding</item>
+        <item name="android:paddingBottom">@dimen/textView_standard_padding</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
-    <!--style for movie detail textview-->
-    <style name="detail_textView_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="release_date_style" parent="layout_wrap_standard_style">
         <item name="android:paddingTop">@dimen/textView_padding</item>
         <item name="android:paddingRight">@dimen/textView_standard_padding</item>
         <item name="android:paddingLeft">@dimen/textView_padding</item>
         <item name="android:textColor">@color/gray</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="label_textView_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">@dimen/textView_padding</item>
-        <item name="android:paddingLeft">@dimen/textView_standard_padding</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_body</item>
     </style>
 
     <!--style for movie detail textview-->
-    <style name="synopsis_textView_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">@dimen/textView_standard_padding</item>
-        <item name="android:paddingLeft">@dimen/textView_standard_padding</item>
+    <style name="detail_textView_style" parent="layout_wrap_standard_style">
+        <item name="android:paddingTop">@dimen/textView_padding</item>
         <item name="android:paddingRight">@dimen/textView_standard_padding</item>
+        <item name="android:paddingLeft">@dimen/textView_padding</item>
         <item name="android:textColor">@color/gray</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+    <style name="vote_count_style" parent="layout_wrap_standard_style">
+        <item name="android:paddingTop">@dimen/textView_padding</item>
+        <item name="android:paddingRight">@dimen/textView_standard_padding</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+    <style name="total_vote_style" parent="layout_wrap_standard_style">
+        <item name="android:paddingRight">@dimen/textView_standard_padding</item>
+        <item name="android:paddingLeft">@dimen/textView_standard_padding</item>
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+
+    <style name="vote_style" parent="layout_wrap_standard_style">
+        <item name="android:paddingTop">@dimen/textView_padding</item>
+        <item name="android:paddingRight">@dimen/textView_standard_padding</item>
+        <item name="android:paddingLeft">@dimen/textView_standard_padding</item>
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/gray</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="label_textView_style" parent="layout_wrap_standard_style">
+        <item name="android:paddingTop">@dimen/text_padding</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">@dimen/text_padding_left</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <!--style for movie detail textview-->
+    <style name="synopsis_textView_style" parent="layout_wrap_standard_style">
+        <item name="android:paddingTop">@dimen/textView_standard_padding</item>
+        <item name="android:paddingLeft">@dimen/synopsis_padding</item>
+        <item name="android:paddingRight">@dimen/detail_padding</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/text_body</item>
+
+    </style>
+
+    <style name="MoviesListStyle">
+        <item name="android:choiceMode">singleChoice</item>
+    </style>
+
+    <style name="play_trailer_style" parent="layout_wrap_standard_style">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginTop">@dimen/textView_standard_padding</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="movie_poster_style" parent="layout_wrap_standard_style">
+        <item name="android:layout_marginLeft">@dimen/poster_margin</item>
+    </style>
+
+    <style name="rating_image_style" parent="layout_wrap_standard_style">
+        <item name="android:layout_marginLeft">@dimen/text_padding_left</item>
+        <item name="android:padding">@dimen/text_padding</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="listview_style" parent="imageView_style">
+        <item name="android:paddingLeft">@dimen/detail_padding</item>
+        <item name="android:paddingTop">@dimen/detail_padding</item>
+
+    </style>
+
+    <style name="reviews_listview_style" parent="listview_style">
+        <item name="android:paddingLeft">@dimen/synopsis_padding</item>
+        <item name="android:paddingTop">@dimen/detail_padding</item>
+        <item name="android:paddingRight">@dimen/detail_padding</item>
+
+    </style>
+
+    <style name="reviews_title" parent="layout_wrap_standard_style">
+        <item name="android:paddingLeft">@dimen/synopsis_padding</item>
+        <item name="android:paddingTop">@dimen/detail_padding</item>
+        <item name="android:text">@string/reviews</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_subheading</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="reviewer_style" parent="layout_wrap_standard_style">
+        <item name="android:layout_weight">2</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_body</item>
+
+    </style>
+
+    <style name="review_style" parent="layout_wrap_standard_style">
+        <item name="android:layout_weight">3</item>
+        <item name="android:textSize">@dimen/text_body</item>
+
+    </style>
+
+    <style name="trailer_image_style" parent="layout_wrap_standard_style">
+        <item name="android:layout_marginLeft">@dimen/detail_padding</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_vertical_margin</item>
+
+    </style>
+
+    <style name="play_button_style" parent="layout_wrap_standard_style">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="trailer_style" parent="layout_wrap_standard_style">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingRight">@dimen/textView_standard_padding</item>
+        <item name="android:paddingTop">@dimen/textView_standard_padding</item>
+        <item name="android:paddingBottom">@dimen/textView_standard_padding</item>
+        <item name="android:paddingLeft">@dimen/detail_padding</item>
+    </style>
+
+    <style name="trailer_text_style" parent="trailer_style">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 
 </resources>

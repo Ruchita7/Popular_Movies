@@ -6,4 +6,14 @@
     <dimen name="griditem_margin">4dp</dimen>
     <dimen name="textView_padding">4dp</dimen>
     <dimen name="textView_standard_padding">8dp</dimen>
+    <dimen name="detail_padding">16dp</dimen>
+    <dimen name="min_width">4dp</dimen>
+    <dimen name="title_padding">14dp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_subheading">16sp</dimen>
+    <dimen name="text_padding">32dp</dimen>
+    <dimen name="text_padding_left">30dp</dimen>
+    <dimen name="synopsis_padding">24dp</dimen>
+    <dimen name="poster_margin">20dp</dimen>
 </resources>

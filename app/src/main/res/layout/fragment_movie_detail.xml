@@ -1,70 +1,136 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="com.example.android.popularmovies.MovieDetailActivityFragment">
+    android:layout_height="wrap_content">
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/layout_standard_style"
         android:orientation="vertical">
 
 
-        <ImageView
-            android:id="@+id/movie_backdrop_imageView"
-            style="@style/imageView_style" />
+        <RelativeLayout style="@style/layout_wrap_standard_style">
+
+            <com.example.android.popularmovies.util.ImageUtil
+                android:id="@+id/movie_backdrop_imageView"
+                style="@style/imageView_style" />
+
+            <ImageView
+                android:id="@+id/play_trailer_main_imageView"
+                style="@style/play_trailer_style"
+                android:src="@drawable/ic_video_play" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/movie_title_textView"
-            style="@style/title_textView_style" />
-
+            style="@style/title_textView_style"
+            android:layout_below="@+id/movie_backdrop_imageView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="8dp">
+            android:orientation="horizontal">
+
 
             <ImageView
                 android:id="@+id/movie_poster_imageView"
-                style="@style/poster_imageView_style" />
+                style="@style/movie_poster_style" />
+
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/layout_wrap_standard_style"
                 android:orientation="vertical">
 
-
-                <TextView
-                    android:id="@+id/plot_synopsis_textView"
-                    style="@style/synopsis_textView_style" />
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    style="@style/layout_wrap_standard_style"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/release_date_label"
                         style="@style/label_textView_style"
                         android:text="@string/release" />
 
                     <TextView
                         android:id="@+id/release_date_textView"
-                        style="@style/detail_textView_style" />
+                        style="@style/release_date_style" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    style="@style/layout_wrap_standard_style"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        style="@style/label_textView_style"
-                        android:text="@string/rating" />
 
-                    <TextView
-                        android:id="@+id/user_rating_textView"
-                        style="@style/detail_textView_style" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/user_rating_image"
+                            style="@style/rating_image_style"
+                            android:src="@drawable/user_rating" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:padding="@dimen/activity_horizontal_margin">
+
+                        <LinearLayout
+                            style="@style/layout_wrap_standard_style"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/user_rating_textView"
+                                style="@style/vote_style" />
+
+                            <TextView
+                                android:id="@+id/max_count_textView"
+                                style="@style/vote_count_style"
+                                android:text="@string/max_score" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/layout_wrap_standard_style"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/vote_count_textView"
+                                style="@style/total_vote_style" />
+                            <!--/LinearLayout-->
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/plot_synopsis_textView"
+            style="@style/synopsis_textView_style" />
+
+        <ListView
+            android:id="@+id/trailers_list"
+            style="@style/listview_style" />
+
+
+        <TextView
+            android:id="@+id/reviews_title"
+            style="@style/reviews_title" />
+
+        <ListView
+            android:id="@+id/reviews_list"
+            style="@style/reviews_listview_style" />
+
+
     </LinearLayout>
+
 </ScrollView>
