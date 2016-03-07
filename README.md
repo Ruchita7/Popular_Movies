@@ -39,15 +39,16 @@ The app will:
 ###### **How to Setup Picasso**
 We recommend that this project use Picasso, a powerful library that will handle image loading and caching on your behalf. If you prefer, you’re welcome to use an alternate library such as Glide.
 We’ve included this to reduce unnecessary extra work and help you focus on applying your app development skills.
-You’ll need to modify the build.gradle file for your app. These modifications will happen in the build.gradle file for your module’s directory, not the project root directory 
+You’ll need to modify the build.gradle file for your app. 
 In your app/build.gradle file, add:
  
 repositories {
 
     mavenCentral()
-
+    
 }
-Next, add compile 'com.squareup.picasso:picasso:2.5.2' to your dependencies block.
+
+Next, add compile **'com.squareup.picasso:picasso:2.5.2'** to your dependencies block.
 
 #####**Using Picasso To Fetch Images and Load Them Into Views**
 You can use Picasso to easily load album art thumbnails into your views using:
