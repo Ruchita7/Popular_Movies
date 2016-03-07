@@ -1,35 +1,40 @@
 ### **Project Summary**
-Most of us can relate to kicking back on the couch and enjoying a movie with friends and family. In this project, you’ll build an app to allow users to discover the most popular movies playing.
-You’ll build the complete functionality of this app in **two** stages which you will submit separately.
+Most of us can relate to kicking back on the couch and enjoying a movie with friends and family. In this project, I have build an app to allow users to discover the most popular movies playing.
+The complete functionality of this app is built in **two** stages which are submitted separately.
 
 
 ###**Why this Project?**
-To become an Android developer, you must know how to bring particular mobile experiences to life. Specifically, you need to know how to build clean and compelling user interfaces (UIs), fetch data from network services, and optimize the experience for various mobile devices. You will hone these fundamental skills in this project.
-By building this app, you will demonstrate your understanding of the foundational elements of programming for Android. Your app will communicate with the Internet and provide a responsive and delightful user experience.
+To be an Android developer, we must need to know how to build clean and compelling user interfaces (UIs), fetch data from network services, and optimize the experience for various mobile devices. One will hone these fundamental skills in this project.
+This app will demonstrate the understanding of the foundational elements of programming for Android and will communicate with the Internet to provide a responsive and delightful user experience.
 
 ###**Stage 1:  Main Discovery Screen, A Details View, and Settings**
+
 ####**User Experience**
-In this stage you’ll build the core experience of your movies app.
-Your app will:
+
+In this stage we’ll build the core experience of the movies app.
+
+The app will:
   •	Upon launch, present the user with an grid arrangement of movie posters.
 
-  •	Allow your user to change sort order via a setting:
+  •	Allow the user to change sort order via a setting:
 
   •	The sort order can be by most popular, or by highest-rated
 
   •	Allow the user to tap on a movie poster and transition to a details screen with additional information such as:
 
-  •	original title
+    •	original title
 
-  •	movie poster image thumbnail
+    •	movie poster image thumbnail
 
-  •	A plot synopsis (called overview in the api)
+    •	A plot synopsis (called overview in the api)
 
-  •	user rating (called top_rated in the api)
+    •	user rating (called top_rated in the api)
 
-  •	release date
+    •	release date
 
-####**Stage 1 - Implementation Guidance**
+
+####**Implementation Guidance**
+
 #####**Image Library - Picasso**
 ###### **How to Setup Picasso**
 We recommend that this project use Picasso, a powerful library that will handle image loading and caching on your behalf. If you prefer, you’re welcome to use an alternate library such as Glide.
@@ -43,11 +48,14 @@ repositories {
 
 }
 Next, add compile 'com.squareup.picasso:picasso:2.5.2' to your dependencies block.
+
 #####**Using Picasso To Fetch Images and Load Them Into Views**
 You can use Picasso to easily load album art thumbnails into your views using:
 Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
 Picasso will handle loading the images on a background thread, image decompression and caching the images.
+
 #####**Working with the themoviedb.org API**
+
 ######A note on resolving poster paths with themoviedb.org API
 You will notice that the API response provides a relative path to a movie poster image when you request the metadata for a specific movie.
 For example, the poster path return for Interstellar is “/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg”
@@ -62,18 +70,19 @@ It’s constructed using 3 parts:
 Combining these three parts gives us a final url ofhttp://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg 
  
 This is also explained explicitly in the API documentation for /configuration.
-#####**Stage 1 - API Hints**
+
+#####**API Hints**
   1.	To fetch popular movies, you will use the API from themoviedb.org.
 
     •	If you don’t already have an account, you will need to create one in order to request an API Key.
 
-      •	In your request for a key, state that your usage will be foreducational/non-commercial use. You will also need to provide some personal information to complete the request. Once you submit your request, you should receive your key via email shortly after.
+      •	In your request for a key, state that your usage will be foreducational/non-commercial use. You will also need to provide  some personal information to complete the request. Once you submit your request, you should receive your key via email shortly after.
 
     •	In order to request popular movies you will want to request data from the/discover/movie endpoint. An API Key is required.
 
     •	Once you obtain your key, you append it to your HTTP request as a URL parameter like so:
 
-    •	http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
+       •	http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
 
     •	You will extract the movie id from this request. You will need this in subsequent requests.
 
@@ -87,6 +96,7 @@ This is also explained explicitly in the API documentation for /configuration.
 •	You will incorporate libraries to simplify the amount of code you need to write
 
 ###**Stage 2: Trailers, Reviews, and Favorites**
+
 ####**User Experience**
 In this stage you’ll add additional functionality to the app you built in Stage 1.
 
@@ -100,9 +110,13 @@ collection that you will maintain and does not require an API request*.
 
   •	You’ll modify the existing sorting criteria for the main view to include an additional pivot to show their favorites collection.
 Lastly, you’ll optimize your app experience for tablet.
-####**Stage 2 - Implementation Guidance**
+
+####**Implementation Guidance**
+
 ####**Working with the themoviedb.org API**
-#####**Stage 2 - API Hints**
+
+#####**API Hints**
+
   1.	To fetch trailers you will want to make a request to the /movie/{id}/videos endpoint.
 
   2.	To fetch reviews you will want to make a request to the /movie/{id}/reviews endpoint
