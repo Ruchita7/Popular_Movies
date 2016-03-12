@@ -1,10 +1,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
    style="@style/main_style"
-    tools:context=".MovieFragment">
+    tools:context=".MainActivity$MovieFragment">
 
-    <GridView
+    <!--GridView
         android:id="@+id/gridview_movies"
-       style="@style/gridView_style"/>
+       style="@style/gridView_style"/-->
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gridview_movies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/MoviesListStyle"
+        android:divider="@null"/>
 </FrameLayout>

@@ -1,11 +1,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/layout_standard_style"
+    android:background="@drawable/touch_selector"
+    android:minHeight="?android:attr/listPreferredItemHeight"
     tools:context="com.example.android.popularmovies.MainActivity.MovieFragment">
+
 
     <ImageView
         android:id="@+id/movie_content_imageview"
-        style="@style/grid_imageView_style"
-    />
+        style="@style/grid_imageView_style" />
 
 </FrameLayout>

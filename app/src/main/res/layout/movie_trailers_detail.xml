@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+   style="@style/layout_wrap_standard_style">
+
+        <ImageView
+            android:id="@+id/trailer_id"
+           style="@style/trailer_image_style"
+            />
+
+        <ImageView
+            android:id="@+id/play_button"
+            style="@style/play_button_style"
+            android:src="@drawable/ic_video_play_small" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/video_type"
+       style="@style/trailer_text_style"/>
+
+    <ImageView
+        android:id="@+id/share_video"
+        style="@style/trailer_style"
+        android:src="@drawable/ic_share_black"
+       />
+</LinearLayout>

@@ -32,7 +32,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static final String LOG_TAG = SettingsActivity.class.getSimpleName();
 
     /**
-     *
      * @param savedInstanceState
      */
     @Override
@@ -56,7 +55,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
 
     /**
-     *
      * @param featureId
      * @param item
      * @return
@@ -146,7 +144,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-               ;
+                ;
     }
 
     /**
@@ -185,4 +183,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public Intent getParentActivityIntent() {
+        return super.getParentActivityIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    }
 }
