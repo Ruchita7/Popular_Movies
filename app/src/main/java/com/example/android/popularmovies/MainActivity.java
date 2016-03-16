@@ -12,6 +12,11 @@ import com.facebook.stetho.Stetho;
 
 import java.util.ArrayList;
 
+/**
+ * @author Ruchita_Maheshwary
+ * Main Activity for P1 and P2-Popular Movies
+ */
+
 public class MainActivity extends AppCompatActivity implements CallBack {
 
     private static final String MOVIE_DETAIL_FRAGMENT_TAG = "DMFTAG";
