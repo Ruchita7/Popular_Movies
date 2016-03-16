@@ -3,8 +3,10 @@ package com.example.android.popularmovies;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+
 /**
- * Created by dell on 11/7/2015.
+ * @author Ruchita_Maheshwary
+ * MovieParcelableObject class implementing Parcelable interface for Popular Movies
  */
 public class MovieParcelableObject implements Parcelable {
 
