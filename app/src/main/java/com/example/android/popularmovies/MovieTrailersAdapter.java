@@ -17,9 +17,13 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * Created by dell on 12/2/2015.
+ * MovieTrailersAdapter for Popular Movies
+ * @author Ruchita_Maheshwary
+ *
  */
+ 
 public class MovieTrailersAdapter extends ArrayAdapter<VideosParcelableObject> implements CustomItemClickListener {
 
     private Activity mContext;
