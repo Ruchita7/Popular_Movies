@@ -19,7 +19,7 @@ import java.util.List;
 
 
 /**
- * MovieTrailersAdapter for Popular Movies
+ * MovieTrailersAdapter for showing movies trailer in Popular Movies
  * @author Ruchita_Maheshwary
  *
  */
