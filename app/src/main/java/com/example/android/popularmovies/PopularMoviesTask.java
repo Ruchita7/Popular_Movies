@@ -1,7 +1,10 @@
 package com.example.android.popularmovies;
 
+
 /**
- * Created by dell on 11/5/2015.
+ * PopularMoviesTask for implementing AsyncTask in Popular Movies app
+ * @author Ruchita_Maheshwary
+ *
  */
 
 import android.content.Context;
