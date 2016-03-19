@@ -112,6 +112,18 @@ If you just want to install the app to your device, you don't have to import pro
 
  •  Compile the sample and install it. Run gradlew installDebug. Or if you on a Windows computer, use **gradlew.bat** instead.
  
+ 
+###FAQs
+
+**The project can no longer be compiled/imported if I move it to another directory**
+
+I typically include the dependencies in the repo and have them already linked, so if you move the project you'll need to also update the path to the dependency. To do this, modify the project.properties file of the project
+
+**I'm getting an error saying that there are multiple versions of a jar**
+
+To fix this, make sure that all the jars you are using conform to the same version. You can do this by just replacing all the problematic jars with the version you would like to use.
+ 
+ 
 ###Contributing
 
 Please follow the **"fork-and-pull"** Git workflow while contributing to this project
