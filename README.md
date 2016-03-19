@@ -4,11 +4,11 @@
 
 Most of us can relate to kicking back on the couch and enjoying a movie with friends and family. In this project, I have build an app to allow users to discover the most popular movies playing. The complete functionality of this app is built in two stages which were submitted separately.
 
-![screenshot1](/screenshot/Screenshot_2016-03-19-08-54-25.png)   ![screenshot2](/screenshot/Screenshot_2016-03-19-09-01-01.png)
+![screenshot1](https://cloud.githubusercontent.com/assets/15085932/13896802/3217bd04-edc0-11e5-8962-d862424f6693.png)   ![screenshot2](https://cloud.githubusercontent.com/assets/15085932/13896800/32175918-edc0-11e5-8d11-e707430b2cb5.png)
 
-![screenshot3](/screenshot/device-2016-03-19-093719.png)
+![screenshot3](https://cloud.githubusercontent.com/assets/15085932/13896799/3215ed8a-edc0-11e5-80cf-04fb97586359.png)
 
-![screenshot4](/screenshot/device-2016-03-19-102457.png)
+![screenshot4](https://cloud.githubusercontent.com/assets/15085932/13896801/3217a60c-edc0-11e5-87f0-9e1b669a8c09.png)
  
 **Stage 1: Main Discovery Screen, A Details View, and Settings**
 
