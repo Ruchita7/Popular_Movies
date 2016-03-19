@@ -1,138 +1,130 @@
-### **Project Summary**
-Most of us can relate to kicking back on the couch and enjoying a movie with friends and family. In this project, I have build an app to allow users to discover the most popular movies playing.
-The complete functionality of this app is built in **two** stages which were submitted separately.
+#Popular Movies
 
+##Overview
 
-###**Why this Project?**
-To be an Android developer, we must need to know how to build clean and compelling user interfaces (UIs), fetch data from network services, and optimize the experience for various mobile devices. One will hone these fundamental skills in this project.
-This app demonstrates the understanding of the foundational elements of programming for Android and provides a responsive and delightful user experience.
+Most of us can relate to kicking back on the couch and enjoying a movie with friends and family. In this project, I have build an app to allow users to discover the most popular movies playing. The complete functionality of this app is built in two stages which were submitted separately.
 
-###**Stage 1:  Main Discovery Screen, A Details View, and Settings**
+![screenshot1](/screenshot/Screenshot_2016-03-19-08-54-25.png)   ![screenshot2](/screenshot/Screenshot_2016-03-19-09-01-01.png)
 
-####**User Experience**
+![screenshot3](/screenshot/device-2016-03-19-093719.png)
 
-In this stage we’ll build the core experience of the movies app.
-
-The app will:
-
-  •	Upon launch, present the user with an grid arrangement of movie posters.
-
-  •	Allow the user to change sort order via a setting:
-
-  •	The sort order can be by most popular, or by highest-rated
-
-  •	Allow the user to tap on a movie poster and transition to a details screen with additional information such as:
-
-    •	original title
-
-    •	movie poster image thumbnail
-
-    •	A plot synopsis (called overview in the api)
-
-    •	user rating (called top_rated in the api)
-
-    •	release date
-
-
-####**Implementation Guidance**
-
-#####**Image Library - Picasso**
-
-I have used Picasso library for handling image loading and caching. For further details check the website at http://square.github.io/picasso/
-
-In your app/build.gradle file, add:
+![screenshot4](/screenshot/device-2016-03-19-102457.png)
  
-repositories {
+**Stage 1: Main Discovery Screen, A Details View, and Settings**
 
-    mavenCentral()
+In this stage the app will:
+
+• Upon launch, present the user with an grid arrangement of movie posters.
+
+• Allow the user to change sort order via a setting:
+
+• The sort order can be by most popular, or by highest-rated
+
+• Allow the user to tap on a movie poster and transition to a details screen with additional information such as:
     
-}
+   (i) original title
 
-Next, add compile **'com.squareup.picasso:picasso:2.5.2'** to your dependencies block.
-
-You can use Picasso to easily load album art thumbnails into your views using:
-
-Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
-
-Picasso will handle loading the images on a background thread, image decompression and caching the images.
-
-#####**Working with the themoviedb.org APIAPI Hints**
-
-  1.	To fetch popular movies, you will use the API from themoviedb.org.
-
-    •	If you don’t already have an account, you will need to create one in order to request an API Key.
-
-      •	In your request for a key, state that your usage will be foreducational/non-commercial use. You will also need to provide  some personal information to complete the request. Once you submit your request, you should receive your key via email shortly after.
-
-    •	In order to request popular movies you will want to request data from the/discover/movie endpoint. An API Key is required.
-
-    •	Once you obtain your key, you append it to your HTTP request as a URL parameter like so:
-
-       •	http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
-
-    •	You will extract the movie id from this request. You will need this in subsequent requests.
-
-**IMPORTANT: PLEASE REMOVE YOUR API KEY WHEN SHARING CODE PUBLICALLY**
-
-
-#####**API Hints**
-
-You will notice that the API response provides a relative path to a movie poster image when you request the metadata for a specific movie.
-
-For example, the poster path return for Interstellar is “/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg”
-
-You will need to append a base path ahead of this relative path to build the complete url you will need to fetch the image using Picasso.
-
-It’s constructed using 3 parts:
-
-  1.	The base URL will look like: http://image.tmdb.org/t/p/.
-
-  2.	Then you will need a ‘size’, which will be one of the following: "w92", "w154", "w185","w342", "w500", "w780", or "original". For most phones we recommend using “w185”.
-
-  3.	And finally the poster path returned by the query, in this case “/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg”
-
-Combining these three parts gives us a final url of http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg 
+   (ii) movie poster image thumbnail
  
-This is also explained explicitly in the API documentation for /configuration.
+   (iii) A plot synopsis (called overview in the api)
+ 
+   (iv) user rating (called top_rated in the api)
+ 
+   (v) release date
+ 
+**Stage 2: Trailers, Reviews, and Favorites**
 
-###**What Will I Learn After Stage 1?**
+In this stage I have added more information to movie details view:
 
-•	You will fetch data from the Internet with theMovieDB API.
+•  Allow users to view and play trailers ( either in the youtube app or a web browser).
 
-•	You will use adapters and custom list layouts to populate list views.
+• Allow users to read reviews of a selected movie.
 
-•	You will incorporate libraries to simplify the amount of code you need to write
+• Allow users to mark a movie as a favorite in the details view by tapping a button(star).
 
-###**Stage 2: Trailers, Reviews, and Favorites**
+• Modify the existing sorting criteria for the main view to include an additional pivot to show their favorites collection. Also optimized app experience for tablet.
 
-####**User Experience**
+For further details see [Guidelines](https://docs.google.com/document/d/1ZlN1fUsCSKuInLECcJkslIqvpKlP7jWL2TP9m6UiA6I/pub?embedded=true#h.7sxo8jefdfll)
 
-In this stage you’ll add additional functionality to the app you built in Stage 1.
 
-You’ll add more information to your movie details view:
-  •	You’ll allow users to view and play trailers ( either in the youtube app or a web browser).
+##Prerequisites
 
-  •	You’ll allow users to read reviews of a selected movie.
+ * The samples are building with compileSdkVersion 23 which requires [JDK 7](http://oracle.com/technetwork/java/javase/downloads/index.html) or higher
 
-  •	You’ll also allow users to mark a movie as a favorite in the details view by tapping a button(star). This is for a local movies 
-collection that you will maintain and does not require an API request*.
+ * Android Studio
 
-  •	You’ll modify the existing sorting criteria for the main view to include an additional pivot to show their favorites collection.
-Lastly, you’ll optimize your app experience for tablet.
+ * To fetch popular movies, you will use the API from [theMovieDb](https://www.themoviedb.org/).
+ 
+    If you don’t already have an account, you will need to create one in order to request an API Key. In your request for a key, state that your usage will be foreducational/non-commercial use. You will also need to provide some personal information to complete the request. Once you submit your request, you should receive your key via email shortly after.
 
-####**Implementation Guidance**
+ * Once you obtain your key, in your **Popular_Movies/gradle.properties**,
+uncomment #MovieKey= and append the key like `#MovieKey=<your_key>`
 
-####**Working with the themoviedb.org API**
+ * In your **Popular_Movies/app/build.gradle** add dependency for Picasso library which handles image loading and caching
+ `compile 'com.squareup.picasso:picasso:2.5.2'` 
+ 
+ * Also I have added dependencies for **Butterknife,Support libraries, Gson, Retrofit,Schematic,RecyclerView, Stetho** in Popular_Movies/app/build.gradle like
+ 
+    `compile 'com.android.support:appcompat-v7:23.1.0'`
+    `compile 'com.android.support:design:23.1.0'`  
+    `compile 'com.squareup.picasso:picasso:2.5.2'`
+    `compile 'com.android.support:support-v4:23.1.0'`
+    `compile 'com.jakewharton:butterknife:7.0.1'`
+    `compile 'com.google.code.gson:gson:2.3'`
+    `compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'`
+    `compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'`
+    `apt 'net.simonvt.schematic:schematic-compiler:0.6.3'`
+    `compile 'net.simonvt.schematic:schematic:0.6.3'`
+    `compile 'com.android.support:recyclerview-v7:23.0.+'`
+    `compile 'com.facebook.stetho:stetho:1.2.0'`
 
-#####**API Hints**
+##Instructions
 
-  1.	To fetch trailers you will want to make a request to the /movie/{id}/videos endpoint.
+###Get the source codes
 
-  2.	To fetch reviews you will want to make a request to the /movie/{id}/reviews endpoint
+Get the source code of the library and example app, by cloning git repository or downloading archives.
 
-  3.	You should use an Intent to open a youtube link in either the native app or a web browser of choice.
+ * If you use **git**, execute the following command in your workspace directory.
+ 
+    `$ git clone https://github.com/Ruchita7/ Popular_Movies.git`
+    
+* If you are using Windows, try it on GitBash or Cygwin or something that supports git.
+ 
+###Import the project to Android Studio
+ 
+Once the project is cloned to disk you can import into Android Studio:
 
-###**What Will I Learn After Stage 2?**
-  •	You will build a fully featured application that looks and feels natural on the latest Android operating system (Lollipop, as of May 2015).
+ * From the toolbar select **File > Import Project**, or Import Non-Android Studio project from the Welcome Quick Start.
 
-  •	You will optimize the UI experience for both phones and tablets.
+ *  Select the directory that is cloned. If you can't see your cloned directory, click "Refresh" icon and find it.
+
+ *  Android Studio will import the project and build it. This might take minutes to complete. Even when the project window is opened, wait until the Gradle tasks are finished and indexed.
+
+ *  Connect your devices to your machine and select app from the select Run/Debug Configuration drop down.Click the Run button
+
+###Build and install using Gradle
+
+If you just want to install the app to your device, you don't have to import project to Android Studio.
+
+ •  After cloning the project, make sure **ANDROID_HOME** environment variable is set to point to your Android SDK. See [Getting Started with Gradle](https://guides.codepath.com/android/Getting-Started-with-Gradle).
+
+ •  Connect an Android device to your computer or start an Android emulator.
+
+ •  Compile the sample and install it. Run gradlew installDebug. Or if you on a Windows computer, use **gradlew.bat** instead.
+ 
+###Contributing
+
+Please follow the **"fork-and-pull"** Git workflow while contributing to this project
+
+ **Fork** the repo on GitHub
+
+ **Commit** changes to a branch in your fork
+
+ **Pull request "upstream"** with your changes
+
+ **Merge** changes in to "upstream" repo
+
+**NOTE:** Be sure to merge the latest from **"upstream"** before making a pull request!
+ 
+ 
+ 
